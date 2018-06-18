@@ -3,7 +3,6 @@ import {Test} from './lib/test';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-
   let requestAnimationFrame =
   window.requestAnimationFrame ||
   window.mozRequestAnimationFrame ||
@@ -152,22 +151,22 @@ let portals = [];
 function update(){
 
   // check keys
-  if (keys[38] || keys[32]) {
-      // up arrow or space
+  if (keys[38] || keys[32] || keys[87]) {
+      // up arrow or space or w
     if(!player.jumping && player.grounded){
      player.jumping = true;
      player.grounded = false;
      player.velY = -player.speed*player.jumpMult;
     }
   }
-  if (keys[39]) {
-      // right arrow
+  if (keys[39] || keys[68]) {
+      // right arrow or d
       if (player.velX < player.speed) {
           player.velX += player.velOffset;
        }
   }
-  if (keys[37]) {
-      // left arrow
+  if (keys[37] || keys[65]) {
+      // left arrow or a
       if (player.velX > -player.speed) {
           player.velX -= player.velOffset;
       }
@@ -183,8 +182,6 @@ function update(){
     portals[i].x += portals[i].velX;
     portals[i].y += portals[i].velY;
   }
-
-
 
 
 
@@ -209,7 +206,7 @@ function update(){
       player.grounded = true;
       player.jumping = false;
     } else if (dir === "t") {
-      player.velY *= -1;
+      player.velY *= 0;
     }
   }
 
@@ -221,9 +218,25 @@ function update(){
 
   for (let i = 0; i < portals.length; i++) {
     ctx.fillStyle = portals[i].color;
-    ctx.fillRect(portals[i].x, portals[i].y,
-      portals[i].width, portals[i].height);
+    // ctx.fillRect(portals[i].x, portals[i].y,
+    //   portals[i].width, portals[i].height);
+
+    ctx.beginPath();
+    ctx.arc(portals[i].x, portals[i].y, portals[i].radius, 0, 2 * Math.PI);
+    ctx.fill();
   }
+
+  let tempPortals = Object.assign([], portals);
+
+  for (let i = 0; i < portals.length; i++) {
+    for (let j = 0; j < boxes.length; j++) {
+      let dir = colCheck(portals[i], boxes[j]);
+      if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
+        tempPortals.splice(i, 1);
+      }
+    }
+  }
+  portals = tempPortals;
 
 
 
@@ -301,17 +314,18 @@ document.body.addEventListener("mousedown", function(e) {
 
   let dx = (e.x - player.x);
   let dy = (e.y - player.y);
-  console.log("dx: ", dx);
-  console.log("dy: ",dy);
+  // console.log("dx: ", dx);
+  // console.log("dy: ",dy);
   let mag = Math.sqrt(dx * dx + dy * dy);
 
   let portal = {
     x: player.x,
     y: player.y,
+    width: 10,
+    height: 10,
+    radius: 5,
     velX: (dx / mag) * 10,
     velY: (dy / mag) * 10,
-    width: 8,
-    height: 8,
     color: color
   };
 
