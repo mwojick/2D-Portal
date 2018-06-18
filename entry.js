@@ -1,17 +1,17 @@
 
-import {Test} from './js/test';
+import {Test} from './lib/test';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-(function() {
-    let requestAnimationFrame =
-    window.requestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.msRequestAnimationFrame;
 
-    window.requestAnimationFrame = requestAnimationFrame;
-})();
+  let requestAnimationFrame =
+  window.requestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.msRequestAnimationFrame;
+
+  window.requestAnimationFrame = requestAnimationFrame;
+
 
 let canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
@@ -145,6 +145,10 @@ boxes.push({
 });
 
 
+
+let portals = [];
+
+
 function update(){
 
   // check keys
@@ -174,6 +178,14 @@ function update(){
 
   player.x += player.velX;
   player.y += player.velY;
+
+  for (let i = 0; i < portals.length; i++) {
+    portals[i].x += portals[i].velX;
+    portals[i].y += portals[i].velY;
+  }
+
+
+
 
 
   ctx.clearRect(0, 0, width, height);
@@ -206,6 +218,16 @@ function update(){
   }
 
   ctx.fill();
+
+  for (let i = 0; i < portals.length; i++) {
+    ctx.fillStyle = portals[i].color;
+    ctx.fillRect(portals[i].x, portals[i].y,
+      portals[i].width, portals[i].height);
+  }
+
+
+
+
 
   requestAnimationFrame(update);
 }
@@ -252,12 +274,71 @@ function colCheck(shapeA, shapeB) {
 
 document.body.addEventListener("keydown", function(e) {
     keys[e.keyCode] = true;
+    // console.log(e.keyCode);
 });
 
 document.body.addEventListener("keyup", function(e) {
     keys[e.keyCode] = false;
 });
 
+document.body.addEventListener("mousedown", function(e) {
+
+  let color = "blue";
+
+  if (e.button === 0) {
+    keys['leftMouse'] = true;
+    color = "blue";
+
+    // console.log(e.x);
+    // console.log(e.y);
+
+    // console.log('left down');
+  } else if (e.button === 2) {
+    keys['rightMouse'] = true;
+    color = "orange";
+    // console.log('right down');
+  }
+
+  let dx = (e.x - player.x);
+  let dy = (e.y - player.y);
+  console.log("dx: ", dx);
+  console.log("dy: ",dy);
+  let mag = Math.sqrt(dx * dx + dy * dy);
+
+  let portal = {
+    x: player.x,
+    y: player.y,
+    velX: (dx / mag) * 10,
+    velY: (dy / mag) * 10,
+    width: 8,
+    height: 8,
+    color: color
+  };
+
+  portals.push(portal);
+
+});
+document.body.addEventListener("mouseup", function(e) {
+  if (e.button === 0) {
+    keys['leftMouse'] = false;
+
+    // console.log('left up');
+  } else if (e.button === 2) {
+    keys['rightMouse'] = false;
+
+    // console.log('right up');
+  }
+});
+
+
+
+
+// $("#myId").mousedown(function(ev){
+//       if(ev.which == 3)
+//       {
+//             alert("Right mouse button clicked on element with id myId");
+//       }
+// });
 
 
 update();
