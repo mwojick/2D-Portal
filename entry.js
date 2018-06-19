@@ -1,6 +1,8 @@
 
 import {Test} from './lib/test';
 import {colCheck} from './lib/util';
+import {player} from './lib/player';
+import {boxFunc} from './lib/boxes';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -17,20 +19,6 @@ let canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
     width = 800,
     height = 600,
-    pDim = 20,
-    player = {
-      x : width/2,
-      y : height - 2* pDim,
-      width : pDim,
-      height : pDim,
-      speed: 5,
-      jumpMult: 2.5,
-      velX: 0,
-      velY: 0,
-      velOffset: 3,
-      jumping: false,
-      grounded: false
-    },
     keys = [],
     friction = 0.8,
     gravity = 0.6,
@@ -40,119 +28,10 @@ canvas.width = width;
 canvas.height = height;
 
 
-// boxes
-let boxes = [];
+let boxes = boxFunc();
 
 let mainBox = {};
 let altBox = {};
-
-// dimensions
-boxes.push({
-  x: 0,
-  y: 0,
-  width: 20,
-  height: height
-});
-// boxes.push({
-//   x: 15,
-//   y: 15,
-//   width: 15,
-//   height: 15
-// });
-boxes.push({
-  x: 0,
-  y: height - 20,
-  width: width,
-  height: 20
-});
-boxes.push({
-  x: 0,
-  y: 0,
-  width: width,
-  height: 20
-});
-boxes.push({
-  x: width - 20,
-  y: 0,
-  width: 20,
-  height: height
-});
-
-
-boxes.push({
-  x: 120,
-  y: 30,
-  width: 80,
-  height: 60
-});
-boxes.push({
-  x: 170,
-  y: 50,
-  width: 80,
-  height: 80
-});
-boxes.push({
-  x: 220,
-  y: 100,
-  width: 80,
-  height: 70
-});
-
-boxes.push({
-  x: 10,
-  y: 400,
-  width: 200,
-  height: 30
-});
-boxes.push({
-  x: 40,
-  y: 470,
-  width: 300,
-  height: 30
-});
-boxes.push({
-  x: 330,
-  y: 430,
-  width: 50,
-  height: 80
-});
-boxes.push({
-  x: 10,
-  y: 530,
-  width: 250,
-  height: 30
-});
-boxes.push({
-  x: 320,
-  y: 400,
-  width: 200,
-  height: 30
-});
-
-boxes.push({
-  x: 520,
-  y: 300,
-  width: 100,
-  height: 40
-});
-boxes.push({
-  x: 320,
-  y: 200,
-  width: 100,
-  height: 40
-});
-boxes.push({
-  x: 620,
-  y: 400,
-  width: 200,
-  height: 200
-});
-boxes.push({
-  x: 520,
-  y: 500,
-  width: 80,
-  height: 80
-});
 
 
 
@@ -166,7 +45,6 @@ function update(){
   if (keys[38] || keys[32] || keys[87]) {
       // up arrow or space or w
     if(player.grounded){
-     player.jumping = true;
      player.grounded = false;
      player.velY = -player.speed*player.jumpMult;
     }
@@ -245,7 +123,8 @@ function update(){
           case 't':
             player.x = altBox.x + altBox.width/2;
             player.y = altBox.y + altBox.height;
-            if (mainBox.dir === 'r' || mainBox.dir === 'l' ) {
+            if ( (mainBox.dir === 'r' || mainBox.dir === 'l')
+                  && player.velY < 0) {
               player.velY = -player.velY;
             }
             break;
@@ -277,7 +156,8 @@ function update(){
           case 't':
             player.x = mainBox.x + mainBox.width/2;
             player.y = mainBox.y + mainBox.height;
-            if (altBox.dir === 'r' || altBox.dir === 'l' ) {
+            if ((altBox.dir === 'r' || altBox.dir === 'l')
+                && player.velY < 0) {
               player.velY = -player.velY;
             }
             break;
@@ -294,10 +174,8 @@ function update(){
 
     if (dir === "l" || dir === "r") {
       player.velX = 0;
-      player.jumping = false;
     } else if (dir === "b") {
       player.grounded = true;
-      player.jumping = false;
     } else if (dir === "t") {
       player.velY *= 0;
     }
@@ -381,7 +259,6 @@ function update(){
 
 document.body.addEventListener("keydown", function(e) {
     keys[e.keyCode] = true;
-    // console.log(e.keyCode);
 });
 
 document.body.addEventListener("keyup", function(e) {
