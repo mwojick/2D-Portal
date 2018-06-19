@@ -1,8 +1,10 @@
 
-import {Test} from './lib/test';
-import {colCheck} from './lib/util';
-import {player} from './lib/player';
-import {boxFunc} from './lib/boxes';
+import { Test } from './lib/test';
+import { colCheck, changeBoxDir } from './lib/collision';
+import { player } from './lib/player';
+import { boxFunc } from './lib/boxes';
+import { teleport } from './lib/teleport';
+import { Canvas } from './lib/canvas';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -15,17 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
   window.requestAnimationFrame = requestAnimationFrame;
 
 
-let canvas = document.getElementById("canvas"),
-    ctx = canvas.getContext("2d"),
-    width = 800,
-    height = 600,
+let canvas = new Canvas("canvas"),
     keys = [],
     friction = 0.8,
     gravity = 0.6,
     maxGrav = 30;
 
-canvas.width = width;
-canvas.height = height;
+canvas.canvas.width = canvas.width;
+canvas.canvas.height = canvas.height;
 
 
 let boxes = boxFunc();
@@ -76,11 +75,12 @@ function update(){
   }
 
 
+  ////////// Draw shapes
 
-  ctx.clearRect(0, 0, width, height);
+  canvas.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "red";
-  ctx.fillRect(player.x, player.y, player.width, player.height);
+  canvas.ctx.fillStyle = "red";
+  canvas.ctx.fillRect(player.x, player.y, player.width, player.height);
 
 
   player.grounded = false;
@@ -96,78 +96,18 @@ function update(){
       color = altPortalColor;
     }
 
-    ctx.fillStyle = color;
-    ctx.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+    canvas.ctx.fillStyle = color;
+    canvas.ctx.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
 
     let dir = colCheck(player, boxes[i]);
 
     if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
       if (mainBox === boxes[i] && Object.keys(altBox).length !== 0) {
-        switch (altBox.dir) {
-          case 'r':
-            player.x = altBox.x - player.width - 1;
-            player.y = altBox.y + altBox.height/2;
-            if ((mainBox.dir === 't' || mainBox.dir === 'b')
-                && player.velX > 0) {
-              player.velX = -4*player.velX;
-            }
-            break;
-          case 'l':
-            player.x = altBox.x + altBox.width + 1;
-            player.y = altBox.y + altBox.height/2;
-            if ((mainBox.dir === 't' || mainBox.dir === 'b')
-                && player.velX < 0) {
-              player.velX = -4*player.velX;
-            }
-            break;
-          case 't':
-            player.x = altBox.x + altBox.width/2;
-            player.y = altBox.y + altBox.height;
-            if ( (mainBox.dir === 'r' || mainBox.dir === 'l')
-                  && player.velY < 0) {
-              player.velY = -player.velY;
-            }
-            break;
-          case 'b':
-            player.x = altBox.x + altBox.width/2;
-            player.y = altBox.y - player.height - 1;
-            player.velY = -player.velY;
-            break;
-        }
-        continue;
+          teleport(player, mainBox, altBox);
+          continue;
       } else if (altBox === boxes[i] && Object.keys(mainBox).length !== 0) {
-        switch (mainBox.dir) {
-          case 'r':
-            player.x = mainBox.x - player.width - 1;
-            player.y = mainBox.y + mainBox.height/2;
-            if ((altBox.dir === 't' || altBox.dir === 'b')
-                && player.velX > 0) {
-              player.velX = -4*player.velX;
-            }
-            break;
-          case 'l':
-            player.x = mainBox.x + mainBox.width + 1;
-            player.y = mainBox.y + mainBox.height/2;
-            if ((altBox.dir === 't' || altBox.dir === 'b')
-                && player.velX < 0) {
-              player.velX = -4*player.velX;
-            }
-            break;
-          case 't':
-            player.x = mainBox.x + mainBox.width/2;
-            player.y = mainBox.y + mainBox.height;
-            if ((altBox.dir === 'r' || altBox.dir === 'l')
-                && player.velY < 0) {
-              player.velY = -player.velY;
-            }
-            break;
-          case 'b':
-            player.x = mainBox.x + mainBox.width/2;
-            player.y = mainBox.y - player.height - 1;
-            player.velY = -player.velY;
-            break;
-        }
-        continue;
+          teleport(player, altBox, mainBox);
+          continue;
       }
     }
 
@@ -189,11 +129,11 @@ function update(){
 
 
   for (let i = 0; i < portals.length; i++) {
-    ctx.fillStyle = portals[i].color;
+    canvas.ctx.fillStyle = portals[i].color;
 
-    ctx.beginPath();
-    ctx.arc(portals[i].x, portals[i].y, portals[i].radius, 0, 2 * Math.PI);
-    ctx.fill();
+    canvas.ctx.beginPath();
+    canvas.ctx.arc(portals[i].x, portals[i].y, portals[i].radius, 0, 2 * Math.PI);
+    canvas.ctx.fill();
   }
 
 
@@ -209,39 +149,15 @@ function update(){
           if (boxes[j] === altBox) {
             altBox = {};
           }
-          switch (dir) {
-            case 'l':
-              mainBox.dir = 'l';
-              break;
-            case 'r':
-              mainBox.dir = 'r';
-              break;
-            case 'b':
-              mainBox.dir = 'b';
-              break;
-            case 't':
-              mainBox.dir = 't';
-              break;
-          }
+          changeBoxDir(mainBox, dir);
+
         } else if (portals[i].color === altPortalColor) {
           altBox = boxes[j];
           if (boxes[j] === mainBox) {
             mainBox = {};
           }
-          switch (dir) {
-            case 'l':
-              altBox.dir = 'l';
-              break;
-            case 'r':
-              altBox.dir = 'r';
-              break;
-            case 'b':
-              altBox.dir = 'b';
-              break;
-            case 't':
-              altBox.dir = 't';
-              break;
-          }
+          changeBoxDir(altBox, dir);
+
         }
         tempPortals.splice(i, 1);
       }
@@ -278,10 +194,13 @@ document.body.addEventListener("mousedown", function(e) {
     color = altPortalColor;
   }
 
-  let dx = (e.x - player.x);
-  let dy = (e.y - player.y);
+  let domRect = canvas.canvas.getBoundingClientRect();
+
+  let dx = (e.x - player.x - domRect.x);
+  let dy = (e.y - player.y - domRect.y);
 
   let mag = Math.sqrt(dx * dx + dy * dy);
+  // debugger;
 
   let portal = {
     x: player.x,
