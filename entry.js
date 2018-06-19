@@ -1,5 +1,6 @@
 
 import {Test} from './lib/test';
+import {colCheck} from './lib/util';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -16,7 +17,7 @@ let canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
     width = 800,
     height = 600,
-    pDim = 15,
+    pDim = 20,
     player = {
       x : width/2,
       y : height - 2* pDim,
@@ -32,7 +33,8 @@ let canvas = document.getElementById("canvas"),
     },
     keys = [],
     friction = 0.8,
-    gravity = 0.6;
+    gravity = 0.6,
+    maxGrav = 30;
 
 canvas.width = width;
 canvas.height = height;
@@ -48,25 +50,31 @@ let altBox = {};
 boxes.push({
   x: 0,
   y: 0,
-  width: 10,
+  width: 20,
   height: height
 });
+// boxes.push({
+//   x: 15,
+//   y: 15,
+//   width: 15,
+//   height: 15
+// });
 boxes.push({
   x: 0,
-  y: height - 5,
+  y: height - 20,
   width: width,
-  height: 50
+  height: 20
 });
 boxes.push({
   x: 0,
   y: 0,
   width: width,
-  height: 10
+  height: 20
 });
 boxes.push({
-  x: width - 10,
+  x: width - 20,
   y: 0,
-  width: 50,
+  width: 20,
   height: height
 });
 
@@ -157,7 +165,7 @@ function update(){
   // check keys
   if (keys[38] || keys[32] || keys[87]) {
       // up arrow or space or w
-    if(!player.jumping && player.grounded){
+    if(player.grounded){
      player.jumping = true;
      player.grounded = false;
      player.velY = -player.speed*player.jumpMult;
@@ -177,7 +185,9 @@ function update(){
   }
 
   player.velX *= friction;
-  player.velY += gravity;
+  if (player.velY < maxGrav) {
+    player.velY += gravity;
+  }
 
   player.x += player.velX;
   player.y += player.velY;
@@ -196,6 +206,8 @@ function update(){
 
 
   player.grounded = false;
+
+  //player + box collision
   for (let i = 0; i < boxes.length; i++) {
 
     let color = "black";
@@ -211,7 +223,52 @@ function update(){
 
     let dir = colCheck(player, boxes[i]);
 
-    // if (dir )
+    if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
+      if (mainBox === boxes[i] && Object.keys(altBox).length !== 0) {
+        switch (altBox.dir) {
+          case 'r':
+            player.x = altBox.x - player.width - 1;
+            player.y = altBox.y + altBox.height/2;
+            break;
+          case 'l':
+            player.x = altBox.x + altBox.width + 1;
+            player.y = altBox.y + altBox.height/2;
+            break;
+          case 't':
+            player.x = altBox.x + altBox.width/2;
+            player.y = altBox.y + altBox.height;
+            break;
+          case 'b':
+            player.x = altBox.x + altBox.width/2;
+            player.y = altBox.y - player.height - 1;
+            player.velY = -player.velY;
+            break;
+        }
+        continue;
+      } else if (altBox === boxes[i] && Object.keys(mainBox).length !== 0) {
+        switch (mainBox.dir) {
+          case 'r':
+            player.x = mainBox.x - player.width - 1;
+            player.y = mainBox.y + mainBox.height/2;
+            break;
+          case 'l':
+            player.x = mainBox.x + mainBox.width + 1;
+            player.y = mainBox.y + mainBox.height/2;
+            break;
+          case 't':
+            player.x = mainBox.x + mainBox.width/2;
+            player.y = mainBox.y + mainBox.height;
+            break;
+          case 'b':
+            player.x = mainBox.x + mainBox.width/2;
+            player.y = mainBox.y - player.height - 1;
+            player.velY = -player.velY;
+            break;
+        }
+        continue;
+      }
+    }
+
 
     if (dir === "l" || dir === "r") {
       player.velX = 0;
@@ -229,10 +286,10 @@ function update(){
   }
 
 
+
+
   for (let i = 0; i < portals.length; i++) {
     ctx.fillStyle = portals[i].color;
-    // ctx.fillRect(portals[i].x, portals[i].y,
-    //   portals[i].width, portals[i].height);
 
     ctx.beginPath();
     ctx.arc(portals[i].x, portals[i].y, portals[i].radius, 0, 2 * Math.PI);
@@ -252,11 +309,39 @@ function update(){
           if (boxes[j] === altBox) {
             altBox = {};
           }
+          switch (dir) {
+            case 'l':
+              mainBox.dir = 'l';
+              break;
+            case 'r':
+              mainBox.dir = 'r';
+              break;
+            case 'b':
+              mainBox.dir = 'b';
+              break;
+            case 't':
+              mainBox.dir = 't';
+              break;
+          }
         } else if (portals[i].color === altPortalColor) {
+          altBox = boxes[j];
           if (boxes[j] === mainBox) {
             mainBox = {};
           }
-          altBox = boxes[j];
+          switch (dir) {
+            case 'l':
+              altBox.dir = 'l';
+              break;
+            case 'r':
+              altBox.dir = 'r';
+              break;
+            case 'b':
+              altBox.dir = 'b';
+              break;
+            case 't':
+              altBox.dir = 't';
+              break;
+          }
         }
         tempPortals.splice(i, 1);
       }
@@ -267,49 +352,10 @@ function update(){
 
 
 
-
   requestAnimationFrame(update);
 }
 
-function colCheck(shapeA, shapeB) {
-    // get the vectors to check against
-    let vX = (shapeA.x + (shapeA.width / 2)) -
-                (shapeB.x + (shapeB.width / 2)),
-        vY = (shapeA.y + (shapeA.height / 2)) -
-                (shapeB.y + (shapeB.height / 2)),
-        // add the half widths and half heights of the objects
-        hWidths = (shapeA.width / 2) + (shapeB.width / 2),
-        hHeights = (shapeA.height / 2) + (shapeB.height / 2),
-        colDir = null;
 
-    // if the x and y vector are less than the half width or half height,
-    //they we must be inside the object, causing a collision
-    if (Math.abs(vX) < hWidths && Math.abs(vY) < hHeights) {
-      // figures out on which side we are colliding
-      //(top, bottom, left, or right)
-      let oX = hWidths - Math.abs(vX);
-      let oY = hHeights - Math.abs(vY);
-
-      if (oX >= oY) {
-        if (vY > 0) {
-          colDir = "t";
-          shapeA.y += oY;
-        } else {
-          colDir = "b";
-          shapeA.y -= oY;
-        }
-      } else {
-        if (vX > 0) {
-          colDir = "l";
-          shapeA.x += oX;
-        } else {
-          colDir = "r";
-          shapeA.x -= oX;
-        }
-      }
-    }
-    return colDir;
-}
 
 document.body.addEventListener("keydown", function(e) {
     keys[e.keyCode] = true;
@@ -328,20 +374,14 @@ document.body.addEventListener("mousedown", function(e) {
     keys['leftMouse'] = true;
     color = mainPortalColor;
 
-    // console.log(e.x);
-    // console.log(e.y);
-
-    // console.log('left down');
   } else if (e.button === 2) {
     keys['rightMouse'] = true;
     color = altPortalColor;
-    // console.log('right down');
   }
 
   let dx = (e.x - player.x);
   let dy = (e.y - player.y);
-  // console.log("dx: ", dx);
-  // console.log("dy: ",dy);
+
   let mag = Math.sqrt(dx * dx + dy * dy);
 
   let portal = {
@@ -361,24 +401,11 @@ document.body.addEventListener("mousedown", function(e) {
 document.body.addEventListener("mouseup", function(e) {
   if (e.button === 0) {
     keys['leftMouse'] = false;
-
-    // console.log('left up');
   } else if (e.button === 2) {
     keys['rightMouse'] = false;
-
-    // console.log('right up');
   }
 });
 
-
-
-
-// $("#myId").mousedown(function(ev){
-//       if(ev.which == 3)
-//       {
-//             alert("Right mouse button clicked on element with id myId");
-//       }
-// });
 
 
 update();
