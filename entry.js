@@ -41,6 +41,9 @@ canvas.height = height;
 // boxes
 let boxes = [];
 
+let mainBox = {};
+let altBox = {};
+
 // dimensions
 boxes.push({
   x: 0,
@@ -146,7 +149,8 @@ boxes.push({
 
 
 let portals = [];
-
+let mainPortalColor = "blue";
+let altPortalColor = "orange";
 
 function update(){
 
@@ -190,14 +194,24 @@ function update(){
   ctx.fillStyle = "red";
   ctx.fillRect(player.x, player.y, player.width, player.height);
 
-  ctx.fillStyle = "black";
-  ctx.beginPath();
 
   player.grounded = false;
   for (let i = 0; i < boxes.length; i++) {
-    ctx.rect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+
+    let color = "black";
+
+    if (mainBox === boxes[i]) {
+      color = mainPortalColor;
+    } else if (altBox === boxes[i]) {
+      color = altPortalColor;
+    }
+
+    ctx.fillStyle = color;
+    ctx.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
 
     let dir = colCheck(player, boxes[i]);
+
+    // if (dir )
 
     if (dir === "l" || dir === "r") {
       player.velX = 0;
@@ -214,7 +228,6 @@ function update(){
     player.velY = 0;
   }
 
-  ctx.fill();
 
   for (let i = 0; i < portals.length; i++) {
     ctx.fillStyle = portals[i].color;
@@ -226,12 +239,25 @@ function update(){
     ctx.fill();
   }
 
+
+  // Portal/wall collision detection
   let tempPortals = Object.assign([], portals);
 
   for (let i = 0; i < portals.length; i++) {
     for (let j = 0; j < boxes.length; j++) {
       let dir = colCheck(portals[i], boxes[j]);
       if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
+        if (portals[i].color === mainPortalColor) {
+          mainBox = boxes[j];
+          if (boxes[j] === altBox) {
+            altBox = {};
+          }
+        } else if (portals[i].color === altPortalColor) {
+          if (boxes[j] === mainBox) {
+            mainBox = {};
+          }
+          altBox = boxes[j];
+        }
         tempPortals.splice(i, 1);
       }
     }
@@ -296,11 +322,11 @@ document.body.addEventListener("keyup", function(e) {
 
 document.body.addEventListener("mousedown", function(e) {
 
-  let color = "blue";
+  let color = mainPortalColor;
 
   if (e.button === 0) {
     keys['leftMouse'] = true;
-    color = "blue";
+    color = mainPortalColor;
 
     // console.log(e.x);
     // console.log(e.y);
@@ -308,7 +334,7 @@ document.body.addEventListener("mousedown", function(e) {
     // console.log('left down');
   } else if (e.button === 2) {
     keys['rightMouse'] = true;
-    color = "orange";
+    color = altPortalColor;
     // console.log('right down');
   }
 
