@@ -2,9 +2,12 @@
 import { Test } from './lib/test';
 import { colCheck, changeBoxDir } from './lib/collision';
 import { player } from './lib/player';
-import { boxFunc } from './lib/boxes';
+// import { boxFunc } from './lib/boxes';
 import { teleport } from './lib/teleport';
 import { Canvas } from './lib/canvas';
+import { Map } from './lib/maps/map';
+import { map1 } from './lib/maps/map1';
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -17,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.requestAnimationFrame = requestAnimationFrame;
 
 
+
 let canvas = new Canvas("canvas"),
     keys = [],
     friction = 0.8,
@@ -27,11 +31,19 @@ canvas.canvas.width = canvas.width;
 canvas.canvas.height = canvas.height;
 
 
-let boxes = boxFunc();
+let map = new Map(map1);
+map.getMap();
+
+let boxes = map.boxesP;
+
+
+let boxSpriteP = document.getElementById("wall_p");
+let boxSpriteNP = document.getElementById("wall_np");
+let boxSpriteBlue = document.getElementById("wall_blue");
+let boxSpriteOrange = document.getElementById("wall_orange");
 
 let mainBox = {};
 let altBox = {};
-
 
 
 let portals = [];
@@ -88,19 +100,22 @@ function update(){
   //player + box collision
   for (let i = 0; i < boxes.length; i++) {
 
-    let color = "black";
+    let sprite = boxSpriteP;
 
     if (mainBox === boxes[i]) {
-      color = mainPortalColor;
+      sprite = boxSpriteBlue;
     } else if (altBox === boxes[i]) {
-      color = altPortalColor;
+      sprite = boxSpriteOrange;
     }
 
-    canvas.ctx.fillStyle = color;
-    canvas.ctx.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+    canvas.ctx.drawImage(sprite, boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+
+    // canvas.ctx.fillStyle = color;
+    // canvas.ctx.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
 
     let dir = colCheck(player, boxes[i]);
 
+    // teleport player
     if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
       if (mainBox === boxes[i] && Object.keys(altBox).length !== 0) {
           teleport(player, mainBox, altBox);
@@ -119,13 +134,12 @@ function update(){
     } else if (dir === "t") {
       player.velY *= 0;
     }
+
   }
 
   if (player.grounded) {
     player.velY = 0;
   }
-
-
 
 
   for (let i = 0; i < portals.length; i++) {
