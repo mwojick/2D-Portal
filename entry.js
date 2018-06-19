@@ -229,14 +229,25 @@ function update(){
           case 'r':
             player.x = altBox.x - player.width - 1;
             player.y = altBox.y + altBox.height/2;
+            if ((mainBox.dir === 't' || mainBox.dir === 'b')
+                && player.velX > 0) {
+              player.velX = -4*player.velX;
+            }
             break;
           case 'l':
             player.x = altBox.x + altBox.width + 1;
             player.y = altBox.y + altBox.height/2;
+            if ((mainBox.dir === 't' || mainBox.dir === 'b')
+                && player.velX < 0) {
+              player.velX = -4*player.velX;
+            }
             break;
           case 't':
             player.x = altBox.x + altBox.width/2;
             player.y = altBox.y + altBox.height;
+            if (mainBox.dir === 'r' || mainBox.dir === 'l' ) {
+              player.velY = -player.velY;
+            }
             break;
           case 'b':
             player.x = altBox.x + altBox.width/2;
@@ -250,14 +261,25 @@ function update(){
           case 'r':
             player.x = mainBox.x - player.width - 1;
             player.y = mainBox.y + mainBox.height/2;
+            if ((altBox.dir === 't' || altBox.dir === 'b')
+                && player.velX > 0) {
+              player.velX = -4*player.velX;
+            }
             break;
           case 'l':
             player.x = mainBox.x + mainBox.width + 1;
             player.y = mainBox.y + mainBox.height/2;
+            if ((altBox.dir === 't' || altBox.dir === 'b')
+                && player.velX < 0) {
+              player.velX = -4*player.velX;
+            }
             break;
           case 't':
             player.x = mainBox.x + mainBox.width/2;
             player.y = mainBox.y + mainBox.height;
+            if (altBox.dir === 'r' || altBox.dir === 'l' ) {
+              player.velY = -player.velY;
+            }
             break;
           case 'b':
             player.x = mainBox.x + mainBox.width/2;
