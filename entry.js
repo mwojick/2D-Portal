@@ -25,7 +25,8 @@ let canvas = new Canvas("canvas"),
     keys = [],
     friction = 0.8,
     gravity = 0.6,
-    maxGrav = 30;
+    maxGrav = 30,
+    portalSpeed = 15;
 
 canvas.canvas.width = canvas.width;
 canvas.canvas.height = canvas.height;
@@ -110,8 +111,6 @@ function update(){
 
     canvas.ctx.drawImage(sprite, boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
 
-    // canvas.ctx.fillStyle = color;
-    // canvas.ctx.fillRect(boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
 
     let dir = colCheck(player, boxes[i]);
 
@@ -142,6 +141,7 @@ function update(){
   }
 
 
+  //draw portals
   for (let i = 0; i < portals.length; i++) {
     canvas.ctx.fillStyle = portals[i].color;
 
@@ -179,11 +179,14 @@ function update(){
   }
   portals = tempPortals;
 
-
+  
 
 
   requestAnimationFrame(update);
 }
+
+
+
 
 
 
@@ -222,8 +225,8 @@ document.body.addEventListener("mousedown", function(e) {
     width: 10,
     height: 10,
     radius: 5,
-    velX: (dx / mag) * 10,
-    velY: (dy / mag) * 10,
+    velX: (dx / mag) * portalSpeed,
+    velY: (dy / mag) * portalSpeed,
     color: color
   };
 
