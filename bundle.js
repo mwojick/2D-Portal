@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
       friction = 0.8,
       gravity = 0.8,
       maxGrav = 40,
-      portalSpeed = 50;
+      portalSpeed = 15;
 
   canvas.canvas.width = canvas.width;
   canvas.canvas.height = canvas.height;
