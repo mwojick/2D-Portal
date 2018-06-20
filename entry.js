@@ -37,10 +37,14 @@ let canvas = new Canvas("canvas"),
     friction = 0.8,
     gravity = 0.8,
     maxGrav = 40,
-    portalSpeed = 15;
+    portalSpeed = 50;
 
 canvas.canvas.width = canvas.width;
 canvas.canvas.height = canvas.height;
+
+// Music
+let audio = new Audio('./music/Portal_Radio_Tune.mp3');
+audio.muted = true;
 
 
 //Get maps
@@ -226,9 +230,15 @@ function update(){
 
 document.body.addEventListener("keydown", function(e) {
     keys[e.keyCode] = true;
+    // p
     if(e.keyCode === 80){
       paused = !paused;
       update();
+    }
+    // m
+    if (e.keyCode === 77) {
+      audio.play();
+      audio.muted = !audio.muted;
     }
 });
 
@@ -276,6 +286,12 @@ document.body.addEventListener("mouseup", function(e) {
   } else if (e.button === 2) {
     keys['rightMouse'] = false;
   }
+});
+
+
+document.querySelector(".select-level").addEventListener("change", function(e) {
+  // debugger;
+  player.levelCount = e.currentTarget.value - 1;
 });
 
 

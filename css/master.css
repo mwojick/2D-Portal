@@ -9,8 +9,9 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-family: 'Roboto', sans-serif;
 }
 
 .directions {
-  
+
 }
