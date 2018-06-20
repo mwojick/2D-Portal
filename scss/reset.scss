@@ -1,3 +1,5 @@
+
+
 html, body, header, nav, h1, a,
 ul, li, strong, main, button, i,
 section, img, div, h2, p, form,
@@ -12,22 +14,27 @@ span, article, footer, select, time, small {
   text-align: inherit;
   text-decoration: inherit;
   vertical-align: inherit;
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 ul {
-  list-style: none; }
+  list-style: none;
+}
 
 li {
-  list-style: none; }
+  list-style: none;
+}
 
 img {
   display: block;
   width: 100%;
-  height: auto; }
+  height: auto;
+}
 
 button,
 input[type="submit"] {
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 input[type="password"],
 input[type="email"],
@@ -42,6 +49,5 @@ button {
   */
   outline: none;
   -webkit-appearance: none;
-  -moz-appearance: none; }
-
-/*# sourceMappingURL=reset.css.map */
+  -moz-appearance: none;
+}

@@ -1,17 +1,13 @@
 canvas {
   background-image: url("wall_texture_s.png");
-  border: 1px solid grey;
-  /* border: 1px solid #000; */
-}
+  border: 1px solid #000;
+  /* border: 1px solid #000; */ }
 
 body {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
-}
+  font-family: 'Roboto', sans-serif; }
 
-.directions {
-
-}
+/*# sourceMappingURL=master.css.map */

@@ -271,9 +271,9 @@ document.body.addEventListener("mousedown", function(e) {
   let portal = {
     x: player.x + player.width/2,
     y: player.y + player.height/2,
-    width: 10,
-    height: 10,
-    radius: 5,
+    width: 15,
+    height: 15,
+    radius: 7,
     velX: (dx / mag) * portalSpeed,
     velY: (dy / mag) * portalSpeed,
     color: color
