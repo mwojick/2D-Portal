@@ -75,6 +75,8 @@ function update(){
     player.y = playerPos[player.levelCount].y;
     mainBox = {};
     altBox = {};
+    document.querySelector(".level").innerText = player.levelCount + 1;
+    document.querySelector(".select-level").value = player.levelCount + 1;
   }
 
   // check keys
@@ -290,8 +292,8 @@ document.body.addEventListener("mouseup", function(e) {
 
 
 document.querySelector(".select-level").addEventListener("change", function(e) {
-  // debugger;
   player.levelCount = e.currentTarget.value - 1;
+
 });
 
 

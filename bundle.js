@@ -159,6 +159,8 @@ document.addEventListener('DOMContentLoaded', function () {
       _player.player.y = _player.playerPos[_player.player.levelCount].y;
       mainBox = {};
       altBox = {};
+      document.querySelector(".level").innerText = _player.player.levelCount + 1;
+      document.querySelector(".select-level").value = _player.player.levelCount + 1;
     }
 
     // check keys
@@ -358,7 +360,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   document.querySelector(".select-level").addEventListener("change", function (e) {
-    // debugger;
     _player.player.levelCount = e.currentTarget.value - 1;
   });
 
@@ -505,7 +506,6 @@ function exitPlayerCol(canvas, player, mapBoxes, sprites) {
     // Go to next level
     if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
       player.levelCount++;
-      document.querySelector(".select-level").value = player.levelCount + 1;
     }
 
     if (dir === "l" || dir === "r") {
