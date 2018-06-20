@@ -6,14 +6,15 @@ import { colCheck, changeBoxDir,
   exitPlayerCol
 } from './lib/collision';
 
-import { player } from './lib/player';
+import { player, playerPos } from './lib/player';
 // import { boxFunc } from './lib/boxes';
 import { teleport } from './lib/teleport';
 import { Canvas } from './lib/canvas';
-import { Map } from './lib/maps/map';
+import { Map, BLOCK_W, BLOCK_H } from './lib/maps/map';
 
-import { map1 } from './lib/maps/map1';
-import { map2 } from './lib/maps/map2';
+import { map1, map2, map3,  map4, map5,
+      map6, map7, map8, map9, map10
+    } from './lib/maps/map_levels';
 
 import { Sprites } from './lib/sprites';
 
@@ -42,8 +43,9 @@ canvas.canvas.height = canvas.height;
 
 
 //Get map
-let maps = [map1, map2];
-let map = new Map(maps[0]);
+let maps = [map1, map2, map3, map4, map5,
+            map6, map7, map8, map9, map10];
+let map = new Map(maps[0], 0);
 map.getMap();
 
 // Get sprites
@@ -62,9 +64,10 @@ let altPortalColor = "orange";
 function update(){
 
   if (player.levelCount !== map.level) {
-    map = new Map(maps[player.levelCount]);
+    map = new Map(maps[player.levelCount], player.levelCount);
     map.getMap();
-    map.level = player.levelCount;
+    player.x = playerPos[player.levelCount].x;
+    player.y = playerPos[player.levelCount].y;
   }
 
   // check keys

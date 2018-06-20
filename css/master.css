@@ -1,5 +1,6 @@
 canvas {
-  background: grey;
+  background-image: url("wall_texture_s.png");
+  border: 1px solid grey;
   /* border: 1px solid #000; */
 }
 
