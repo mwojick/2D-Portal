@@ -1,12 +1,21 @@
 
 import { Test } from './lib/test';
-import { colCheck, changeBoxDir } from './lib/collision';
+
+import { colCheck, changeBoxDir,
+  objectPlayerCol, objectPortalCol,
+  exitPlayerCol
+} from './lib/collision';
+
 import { player } from './lib/player';
 // import { boxFunc } from './lib/boxes';
 import { teleport } from './lib/teleport';
 import { Canvas } from './lib/canvas';
 import { Map } from './lib/maps/map';
+
 import { map1 } from './lib/maps/map1';
+import { map2 } from './lib/maps/map2';
+
+import { Sprites } from './lib/sprites';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,24 +33,23 @@ document.addEventListener('DOMContentLoaded', () => {
 let canvas = new Canvas("canvas"),
     keys = [],
     friction = 0.8,
-    gravity = 0.6,
+    gravity = 0.7,
     maxGrav = 30,
-    portalSpeed = 15;
+    portalSpeed = 20;
 
 canvas.canvas.width = canvas.width;
 canvas.canvas.height = canvas.height;
 
 
-let map = new Map(map1);
+//Get map
+let maps = [map1, map2];
+let map = new Map(maps[0]);
 map.getMap();
 
-let boxes = map.boxesP;
+// Get sprites
+let sprites = new Sprites();
 
 
-let boxSpriteP = document.getElementById("wall_p");
-let boxSpriteNP = document.getElementById("wall_np");
-let boxSpriteBlue = document.getElementById("wall_blue");
-let boxSpriteOrange = document.getElementById("wall_orange");
 
 let mainBox = {};
 let altBox = {};
@@ -52,6 +60,12 @@ let mainPortalColor = "blue";
 let altPortalColor = "orange";
 
 function update(){
+
+  if (player.levelCount !== map.level) {
+    map = new Map(maps[player.levelCount]);
+    map.getMap();
+    map.level = player.levelCount;
+  }
 
   // check keys
   if (keys[38] || keys[32] || keys[87]) {
@@ -92,34 +106,36 @@ function update(){
 
   canvas.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  canvas.ctx.fillStyle = "red";
-  canvas.ctx.fillRect(player.x, player.y, player.width, player.height);
+  // canvas.ctx.fillStyle = "red";
+  // canvas.ctx.fillRect(player.x, player.y, player.width, player.height);
+
+  canvas.ctx.drawImage(sprites.cubeSprite, player.x, player.y, player.width, player.height);
 
 
   player.grounded = false;
 
   //player + box collision
-  for (let i = 0; i < boxes.length; i++) {
+  for (let i = 0; i < map.boxesP.length; i++) {
 
-    let sprite = boxSpriteP;
+    let sprite = sprites.boxSpriteP;
 
-    if (mainBox === boxes[i]) {
-      sprite = boxSpriteBlue;
-    } else if (altBox === boxes[i]) {
-      sprite = boxSpriteOrange;
+    if (mainBox === map.boxesP[i]) {
+      sprite = sprites.boxSpriteBlue;
+    } else if (altBox === map.boxesP[i]) {
+      sprite = sprites.boxSpriteOrange;
     }
 
-    canvas.ctx.drawImage(sprite, boxes[i].x, boxes[i].y, boxes[i].width, boxes[i].height);
+    canvas.ctx.drawImage(sprite, map.boxesP[i].x, map.boxesP[i].y, map.boxesP[i].width, map.boxesP[i].height);
 
 
-    let dir = colCheck(player, boxes[i]);
+    let dir = colCheck(player, map.boxesP[i]);
 
     // teleport player
     if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
-      if (mainBox === boxes[i] && Object.keys(altBox).length !== 0) {
+      if (mainBox === map.boxesP[i] && Object.keys(altBox).length !== 0) {
           teleport(player, mainBox, altBox);
           continue;
-      } else if (altBox === boxes[i] && Object.keys(mainBox).length !== 0) {
+      } else if (altBox === map.boxesP[i] && Object.keys(mainBox).length !== 0) {
           teleport(player, altBox, mainBox);
           continue;
       }
@@ -135,6 +151,11 @@ function update(){
     }
 
   }
+
+  //objectPlayerCol
+  objectPlayerCol(canvas, player, map.boxesNP, sprites.boxSpriteNP);
+  exitPlayerCol(canvas, player, map.exit, sprites.exitSprite);
+
 
   if (player.grounded) {
     player.velY = 0;
@@ -155,19 +176,19 @@ function update(){
   let tempPortals = Object.assign([], portals);
 
   for (let i = 0; i < portals.length; i++) {
-    for (let j = 0; j < boxes.length; j++) {
-      let dir = colCheck(portals[i], boxes[j]);
+    for (let j = 0; j < map.boxesP.length; j++) {
+      let dir = colCheck(portals[i], map.boxesP[j]);
       if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
         if (portals[i].color === mainPortalColor) {
-          mainBox = boxes[j];
-          if (boxes[j] === altBox) {
+          mainBox = map.boxesP[j];
+          if (map.boxesP[j] === altBox) {
             altBox = {};
           }
           changeBoxDir(mainBox, dir);
 
         } else if (portals[i].color === altPortalColor) {
-          altBox = boxes[j];
-          if (boxes[j] === mainBox) {
+          altBox = map.boxesP[j];
+          if (map.boxesP[j] === mainBox) {
             mainBox = {};
           }
           changeBoxDir(altBox, dir);
@@ -179,12 +200,16 @@ function update(){
   }
   portals = tempPortals;
 
-  
+  tempPortals = Object.assign([], portals);
+  portals = objectPortalCol(map.boxesNP, tempPortals, portals);
+
+  tempPortals = Object.assign([], portals);
+  portals = objectPortalCol(map.exit, tempPortals, portals);
 
 
+  // UPDATE every frame
   requestAnimationFrame(update);
 }
-
 
 
 
