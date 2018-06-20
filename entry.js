@@ -35,14 +35,14 @@ let canvas = new Canvas("canvas"),
     keys = [],
     friction = 0.8,
     gravity = 0.7,
-    maxGrav = 30,
-    portalSpeed = 20;
+    maxGrav = 35,
+    portalSpeed = 15;
 
 canvas.canvas.width = canvas.width;
 canvas.canvas.height = canvas.height;
 
 
-//Get map
+//Get maps
 let maps = [map1, map2, map3, map4, map5,
             map6, map7, map8, map9, map10];
 let map = new Map(maps[0], 0);
@@ -270,7 +270,7 @@ document.body.addEventListener("mouseup", function(e) {
 });
 
 
-
+// first update call
 update();
 
 
