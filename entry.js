@@ -78,18 +78,18 @@ function update(){
       // up arrow or space or w
     if(player.grounded){
      player.grounded = false;
-     player.velY = -player.speed*player.jumpMult;
+     player.velY = -player.speedY*player.jumpMult;
     }
   }
   if (keys[39] || keys[68]) {
       // right arrow or d
-      if (player.velX < player.speed) {
+      if (player.velX < player.speedX) {
           player.velX += player.velOffset;
        }
   }
   if (keys[37] || keys[65]) {
       // left arrow or a
-      if (player.velX > -player.speed) {
+      if (player.velX > -player.speedX) {
           player.velX -= player.velOffset;
       }
   }
@@ -226,7 +226,7 @@ function update(){
 
 document.body.addEventListener("keydown", function(e) {
     keys[e.keyCode] = true;
-    if(e.keyCode === 32){
+    if(e.keyCode === 80){
       paused = !paused;
       update();
     }
