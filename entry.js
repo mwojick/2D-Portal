@@ -29,13 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.requestAnimationFrame = requestAnimationFrame;
 
-
+  let paused = false;
+  let req;
 
 let canvas = new Canvas("canvas"),
     keys = [],
     friction = 0.8,
-    gravity = 0.7,
-    maxGrav = 35,
+    gravity = 0.8,
+    maxGrav = 40,
     portalSpeed = 15;
 
 canvas.canvas.width = canvas.width;
@@ -68,6 +69,8 @@ function update(){
     map.getMap();
     player.x = playerPos[player.levelCount].x;
     player.y = playerPos[player.levelCount].y;
+    mainBox = {};
+    altBox = {};
   }
 
   // check keys
@@ -157,6 +160,7 @@ function update(){
 
   //objectPlayerCol
   objectPlayerCol(canvas, player, map.boxesNP, sprites.boxSpriteNP);
+  objectPlayerCol(canvas, player, map.boxesT, sprites.boxSpriteT);
   exitPlayerCol(canvas, player, map.exit, sprites.exitSprite);
 
 
@@ -209,17 +213,23 @@ function update(){
   tempPortals = Object.assign([], portals);
   portals = objectPortalCol(map.exit, tempPortals, portals);
 
+  if (paused) {
+    cancelAnimationFrame(req);
+  } else {
+    // UPDATE every frame
+    req = requestAnimationFrame(update);
+  }
 
-  // UPDATE every frame
-  requestAnimationFrame(update);
 }
-
-
 
 
 
 document.body.addEventListener("keydown", function(e) {
     keys[e.keyCode] = true;
+    if(e.keyCode === 32){
+      paused = !paused;
+      update();
+    }
 });
 
 document.body.addEventListener("keyup", function(e) {
@@ -241,15 +251,14 @@ document.body.addEventListener("mousedown", function(e) {
 
   let domRect = canvas.canvas.getBoundingClientRect();
 
-  let dx = (e.x - player.x - domRect.x);
-  let dy = (e.y - player.y - domRect.y);
+  let dx = (e.x - player.x - player.width/2 - domRect.x);
+  let dy = (e.y - player.y - player.height/2 - domRect.y);
 
   let mag = Math.sqrt(dx * dx + dy * dy);
-  // debugger;
 
   let portal = {
-    x: player.x,
-    y: player.y,
+    x: player.x + player.width/2,
+    y: player.y + player.height/2,
     width: 10,
     height: 10,
     radius: 5,
