@@ -25,51 +25,56 @@
   </head>
   <body>
     <div class="directions">
-      Controls:
+      Controls
 
       W or Left arrow: move left
-
       A, Up arrow, or space: jump
-
       D or Right arrow: move right
 
       R: Reset Level
-
       P: Pause Game
       M: Toggle Music
 
-      Select Level:
-      <select class="select-level">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
+      <div class="select">
+        <div class="select-level-text">
+          Select Level:
+        </div>
+        <select class="select-level">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
 
     </div>
     <div class="main">
       <div class="top">
 
+        <div class="level-info">
+          <div class="level-text">
+            Level-
+          </div>
+          <div class="level">1</div>
+        </div>
+
         <div class="title">
           2D-Portal
         </div>
 
-        <div class="level-text">
-          Level <div class="level">1</div>
-        </div>
-
         <div class="description-button">
-
+          Description
         </div>
-        description
-        <a href="https://github.com/mwojick">Github</a>
-        <a href="https://www.linkedin.com/in/matthew-wojick-95098b69/">Linkedin</a>
+        <a href="https://github.com/mwojick"><i class="fab fa-github-square fa-2x"></i></a>
+
+        <a href="https://www.linkedin.com/in/matthew-wojick-95098b69/"><i class="fab fa-linkedin fa-2x"></i></a>
+
       </div>
       <canvas id="canvas" width="600" height="600"></canvas>
     </div>
