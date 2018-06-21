@@ -168,6 +168,7 @@ function update(){
   //objectPlayerCol
   objectPlayerCol(canvas, player, map.boxesNP, sprites.boxSpriteNP);
   objectPlayerCol(canvas, player, map.boxesT, sprites.boxSpriteT);
+  objectPlayerCol(canvas, player, map.cake, sprites.cakeSprite);
   exitPlayerCol(canvas, player, map.exit, sprites.exitSprite);
 
 
