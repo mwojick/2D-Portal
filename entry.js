@@ -37,7 +37,7 @@ let canvas = new Canvas("canvas"),
     keys = [],
     friction = 0.8,
     gravity = 0.8,
-    maxGrav = 40,
+    maxGrav = 38,
     portalSpeed = 15;
 
 canvas.canvas.width = canvas.width;
