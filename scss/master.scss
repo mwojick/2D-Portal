@@ -46,6 +46,12 @@ body {
   font-size: 50px;
   flex-grow: 3;
 }
+.two {
+  color: $blue;
+}
+.dee {
+  color: $orange;
+}
 .level-info {
   font-size: 40px;
   flex-grow: 3;
@@ -55,24 +61,98 @@ body {
 .description-button {
   flex-grow: 2;
   font-size: 20px;
-  width: 20px;
+  width: 60px;
 }
 
 
 
 .directions {
+  font-size: 22px;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
   height: 100%;
   background: $grey;
-  margin-right: 15px;
-  padding: 50px 20px;
+  margin-right: 35px;
+  padding: 130px 20px;
   border-radius: 10px;
 }
 
 
+.controls {
+  margin-bottom: 40px;
+  font-size: 30px;
+
+}
+
+
+.AWD {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+  li {
+    border: 1px solid black;
+    font-size: 26px;
+    border-radius: 10px;
+    padding: 20px 25px;
+    width: auto;
+    margin: 0 20px;
+    text-align: center;
+  }
+}
+.arrow-keys {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 10px;
+  li {
+    margin: 0 30px;
+    width: 120px;
+    text-align: center;
+  }
+}
+.move-funcs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px;
+  li {
+    margin: 0 10px;
+    width: 120px;
+    text-align: center;
+  }
+}
+
+.other-keys {
+  display: flex;
+  div {
+    margin: 30px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.other-key {
+  border: 1px solid black;
+  font-size: 26px;
+  border-radius: 10px;
+  padding: 20px 25px;
+  width: auto;
+  margin: 10px 20px;
+  text-align: center;
+}
+
+
+
 .select {
+  margin-top: 30px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -80,11 +160,14 @@ body {
 }
 .select-level-text {
   margin-right: 10px;
+  font-size: 24px;
 }
 .select-level {
+  border-radius: 10px;
+  font-size: 20px;
   background: white;
   border: 1px solid black;
-  padding: 10px 15px;
+  padding: 12px 15px;
   text-align-last:center;
 }
 

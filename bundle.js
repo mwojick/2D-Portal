@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
   audio.muted = true;
 
   //Get maps
-  var maps = [_map_levels.map1, _map_levels.map2, _map_levels.map3, _map_levels.map4, _map_levels.map5, _map_levels.map6, _map_levels.map7, _map_levels.map8, _map_levels.map9, _map_levels.map10];
+  var maps = [_map_levels.map1, _map_levels.map2, _map_levels.map3, _map_levels.map4, _map_levels.map5, _map_levels.map6, _map_levels.map7, _map_levels.map8, _map_levels.map9, _map_levels.map10, _map_levels.map11];
   var map = new _map.Map(maps[0], 0);
   map.getMap();
 
@@ -653,7 +653,9 @@ var map8 = exports.map8 = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 0,
 
 var map9 = exports.map9 = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
 
-var map10 = exports.map10 = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
+var map10 = exports.map10 = [4, 4, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 1, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 4, 0, 0, 2, 0, 4, 0, 0, 0, 0, 1, 0, 0, 4, 4, 0, 0, 0, 2, 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 2, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 3, 2, 1, 0, 2, 0, 0, 0, 0, 4, 0, 0, 2, 2, 0, 2, 2, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 4, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 2, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 4, 1, 1, 1, 2, 2, 2];
+
+var map11 = exports.map11 = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2];
 
 /***/ }),
 
@@ -690,11 +692,11 @@ var player = exports.player = {
   velY: 0,
   velOffset: 4,
   grounded: false,
-  levelCount: 0
+  levelCount: 9
 };
 
 // Starting player positions for each level
-var playerPos = exports.playerPos = [{ x: _map.BLOCK_W, y: 5 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 7 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 5 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 11 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 7 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 2 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 3 * _map.BLOCK_H }, { x: 3 * _map.BLOCK_W, y: _map.BLOCK_H }, { x: _map.BLOCK_W, y: 5 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 5 * _map.BLOCK_H }];
+var playerPos = exports.playerPos = [{ x: _map.BLOCK_W, y: 5 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 7 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 5 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 11 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 7 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 2 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 3 * _map.BLOCK_H }, { x: 3 * _map.BLOCK_W, y: _map.BLOCK_H }, { x: _map.BLOCK_W, y: 5 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 11 * _map.BLOCK_H }, { x: _map.BLOCK_W, y: 11 * _map.BLOCK_H }];
 
 /***/ }),
 
