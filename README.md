@@ -34,18 +34,23 @@ This project will be implemented using the following technologies:
 
 #### Over the weekend
 - [x] Looked at various tutorials on basic 2D javascript platformers.
-- [x] Implemented a simple canvas window with a player and objects. Has basic collision detection, arrow key event listeners, and velocity/gravity/friction attributes.
+- [x] Implemented a simple canvas window with player and objects. Has basic collision detection, arrow key event listeners, and velocity/gravity/friction attributes.
 
 #### Day 1
-- [ ] Reorganize file structure, and put elements like the player, canvas, and key mapping into different classes.
-- [ ] Implement mouse controls for shooting portals from the player and switching between blue and orange.
+- [x] Reorganize file structure, and put elements like the player, canvas, and key mapping into different classes.
+- [x] Implement mouse controls for the user to shoot blue and orange portals.
+- [x] Implement collision detection between portals and walls, and portals and players
+- [x] Teleport player between portals.
 
 #### Day 2
-- [ ] Implement collision detection between portals and walls, and portals and players (teleport player between portals).
+- [x] Implement new type of block that you can shoot through but can't pass though.
+- [x] Design custom bitmap editor to make level design simpler.
+- [x] Import sprites for player and walls.
+- [x] Add additional levels.
 
 #### Day 3
-- [ ] Add sprites and other styling to the canvas.
+- [x] Continue to add additional levels.
+- [x] Add keyboard/mouse controls to the side.
 
 #### Day 4
-- [ ] Add additional levels, and continue adding sprites
-- [ ] Add description, and keyboard/mouse controls to the side.
+- [ ] Add button to show description of the game.
