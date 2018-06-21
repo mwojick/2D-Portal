@@ -8,10 +8,10 @@
 
 In 2D Portal, users will be able to:
 
-- [ ] Move and jump around the map using movement keys
-- [ ] Shoot portals onto walls using mouse buttons
-- [ ] Move between the two portals
-- [ ] See a description of the controls, and objective of the game
+- [x] Move and jump around the map using movement keys
+- [x] Shoot portals onto walls using mouse buttons
+- [x] Move between the two portals
+- [x] See a description of the controls, and objective of the game
 
 ### Wireframes
 
@@ -24,10 +24,11 @@ The app will consist of the main canvas element with the gameplay elements insid
 
 This project will be implemented using the following technologies:
 
-* HTML/CSS
+* HTML/CSS/SCSS
 * JavaScript for game physics and logic.
 * HTML5 Canvas for DOM manipulation and rendering.
 * Webpack to bundle up the JS files.
+* Font Awesome for icons.
 
 
 ### Implementation Timeline
@@ -54,3 +55,7 @@ This project will be implemented using the following technologies:
 
 #### Day 4
 - [ ] Add button to show description of the game.
+
+### Development Build Steps:
+1. `npm install`
+2. For making changes to scss: `sass --watch scss:css`

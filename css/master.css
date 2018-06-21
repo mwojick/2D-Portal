@@ -4,7 +4,7 @@ html {
   background-size: cover; }
 
 canvas {
-  background-image: url("wall_texture_s.png");
+  background-image: url("../img/wall_texture_s.png");
   border: 1px solid #BCBCBC;
   /* border: 1px solid #000; */ }
 
@@ -57,16 +57,17 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 350px;
+  width: 470px;
   height: 100%;
   background: #BCBCBC;
-  margin-right: 30px;
-  padding: 80px 20px;
+  margin-right: 35px;
+  margin-top: 50px;
+  padding: 40px 20px;
   border-radius: 10px; }
 
 .controls {
   margin-bottom: 40px;
-  font-size: 30px; }
+  font-size: 40px; }
 
 .AWD {
   width: 100%;
@@ -79,7 +80,7 @@ body {
     font-size: 26px;
     border-radius: 10px;
     padding: 20px 25px;
-    margin: 0 25px;
+    margin: 0 50px;
     text-align: center;
     background: white; }
 
@@ -154,5 +155,16 @@ a:hover i {
   border-radius: 4px;
   color: white;
   background: black; }
+
+.mouse-control {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 30px 0; }
+  .mouse-control li {
+    margin-bottom: 50px; }
+  .mouse-control img {
+    width: 180px;
+    height: 180px; }
 
 /*# sourceMappingURL=master.css.map */
