@@ -13,7 +13,8 @@ import { Canvas } from './lib/canvas';
 import { Map, BLOCK_W, BLOCK_H } from './lib/maps/map';
 
 import { map1, map2, map3,  map4, map5,
-      map6, map7, map8, map9, map10, map11
+      map6, map7, map8, map9, map10,
+      map11, map12, map13
     } from './lib/maps/map_levels';
 
 import { Sprites } from './lib/sprites';
@@ -49,7 +50,7 @@ audio.muted = true;
 
 //Get maps
 let maps = [map1, map2, map3, map4, map5,
-            map6, map7, map8, map9, map10, map11];
+            map6, map7, map8, map9, map10, map11, map12, map13];
 let map = new Map(maps[0], 0);
 map.getMap();
 
