@@ -1,5 +1,7 @@
 ## 2D - Portal
 
+### [Live Site](https://mwojick.github.io/2D-Portal/)
+
 ### Background and Overview
 
 2D Portal is a puzzle-platformer game inspired by the Portal series of games. The player navigates through a series of levels by strategically placing portals in two different places and moving between them.
