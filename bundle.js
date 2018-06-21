@@ -707,7 +707,7 @@ var player = exports.player = {
   velY: 0,
   velOffset: 4,
   grounded: false,
-  levelCount: 12
+  levelCount: 0
 };
 
 // Starting player positions for each level
