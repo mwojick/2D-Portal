@@ -10,4 +10,12 @@ body {
   align-items: center;
   font-family: 'Roboto', sans-serif; }
 
+.directions {
+  width: 400px; }
+
+.select-level {
+  background: #ff8022;
+  padding: 10px 15px;
+  text-align-last: center; }
+
 /*# sourceMappingURL=master.css.map */

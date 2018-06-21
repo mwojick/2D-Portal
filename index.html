@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" oncontextmenu="return false">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120921803-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-120921803-1');
+    </script>
+
     <meta charset="utf-8">
     <title>2D Portal</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/master.css">
+
     <script src="./bundle.js" charset="utf-8"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
   <body>
     <div class="directions">
-      <!-- Directions:
-
-      Keyboard controls:
+      Controls:
 
       W or Left arrow: move left
 
@@ -21,8 +33,12 @@
 
       D or Right arrow: move right
 
-      P: pause -->
+      R: Reset Level
 
+      P: Pause Game
+      M: Toggle Music
+
+      Select Level:
       <select class="select-level">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -38,11 +54,19 @@
 
     </div>
     <div class="main">
-      <div class="description-button">
-        2D-Portal
+      <div class="top">
 
-        Level <div class="level">1</div>
+        <div class="title">
+          2D-Portal
+        </div>
 
+        <div class="level-text">
+          Level <div class="level">1</div>
+        </div>
+
+        <div class="description-button">
+
+        </div>
         description
         <a href="https://github.com/mwojick">Github</a>
         <a href="https://www.linkedin.com/in/matthew-wojick-95098b69/">Linkedin</a>

@@ -313,6 +313,11 @@ document.addEventListener('DOMContentLoaded', function () {
       audio.play();
       audio.muted = !audio.muted;
     }
+    // r
+    if (e.keyCode === 82) {
+      _player.player.x = _player.playerPos[map.level].x;
+      _player.player.y = _player.playerPos[map.level].y;
+    }
   });
 
   document.body.addEventListener("keyup", function (e) {

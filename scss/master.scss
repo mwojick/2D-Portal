@@ -1,6 +1,8 @@
 //sass --watch scss:css
 
 $grey: #000;
+$blue: #2596ff;
+$orange: #ff8022;
 
 canvas {
   background-image: url("wall_texture_s.png");
@@ -17,5 +19,11 @@ body {
 }
 
 .directions {
+  width: 400px;
+}
 
+.select-level {
+  background: $orange;
+  padding: 10px 15px;
+  text-align-last:center;
 }

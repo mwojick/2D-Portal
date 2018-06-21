@@ -242,6 +242,11 @@ document.body.addEventListener("keydown", function(e) {
       audio.play();
       audio.muted = !audio.muted;
     }
+    // r
+    if (e.keyCode === 82) {
+      player.x = playerPos[map.level].x;
+      player.y = playerPos[map.level].y;
+    }
 });
 
 document.body.addEventListener("keyup", function(e) {
