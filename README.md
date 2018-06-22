@@ -67,10 +67,10 @@ export const teleport = (player, box1, box2) => {
 }
 ```
 
-### Development Build Steps:
+### Build Process:
 1. `npm install`
 2. For making changes to scss: `sass --watch scss:css`
 
-##### Hint for levels 10-11
+#### Hint for levels 10-11
 * 10 - You can still shoot portals when the game is paused.
 * 11 - The reset button preserves your velocity. :)
