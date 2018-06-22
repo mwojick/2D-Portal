@@ -56,7 +56,8 @@ This project will be implemented using the following technologies:
 - [x] Add keyboard/mouse controls to the side.
 
 #### Day 4
-- [ ] Add button to show description of the game.
+- [x] Add last level (super difficult)
+- [x] Add button to show description of the game.
 
 ### Development Build Steps:
 1. `npm install`
