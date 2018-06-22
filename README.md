@@ -2,29 +2,36 @@
 
 ### [Live Site](https://mwojick.github.io/2D-Portal/)
 
-### Background and Overview
+- [Introduction](#introduction)
+- [Features](#features)
+- [Screenshot](#screenshot)
+- [Technologies Used](#technologies-used)
+- [Technical Challenge](#technical-challenge)
+- [Build Process](#build-process)
+
+### Introduction
 
 2D Portal is a puzzle-platformer game inspired by the Portal series of games. The player navigates through a series of levels by strategically placing portals in two different places and moving between them.
 
-### Functionality & MVP
+### Features
 
-In 2D Portal, users will be able to:
+In 2D Portal, users can:
 
 - [x] Move and jump around the map using movement keys
 - [x] Shoot portals onto walls using mouse buttons
 - [x] Move between the two portals
 - [x] See a description of the controls, and objective of the game
 
-### Wireframes
+### Screenshot
 
-The app will consist of the main canvas element with the gameplay elements inside, with a description of the game on the side (or potentially in modal form). This is an example of one potential view of the game:
+The app consists of a main canvas element with gameplay elements inside, with a description of the game in modal form (by clicking on the description button):
 
-![alt text](https://res.cloudinary.com/mwojick/image/upload/v1529314743/2D%20Portal/2D_Portal.png "2D Portal Game")
+![alt text](./img/2d-portal-screenshot.png "2D Portal Game")
 
 
-### Architecture and Technologies
+### Technologies Used
 
-This project will be implemented using the following technologies:
+This project was built using the following technologies:
 
 * HTML/CSS/SCSS
 * JavaScript for game physics and logic.
@@ -32,33 +39,38 @@ This project will be implemented using the following technologies:
 * Webpack to bundle up the JS files.
 * Font Awesome for icons.
 
+### Technical Challenge
 
-### Implementation Timeline
+The most difficult technical challenge for this project was translating the users coordinates and velocities when they go through portals. The collision detection algorithm used for this project returns a letter based on the side that the box was hit on. Using this information, I take the side that the exit portal was shot on and use that to determine how to teleport the player. For instance, one of the cases in the switch statement for my teleport function is as follows:
 
-#### Over the weekend
-- [x] Looked at various tutorials on basic 2D javascript platformers.
-- [x] Implemented a simple canvas window with player and objects. Has basic collision detection, arrow key event listeners, and velocity/gravity/friction attributes.
+```JavaScript
+export const teleport = (player, box1, box2) => {
+  switch (box2.dir) {
+    case 'b':
+      player.x = box2.x + box2.width/2 - player.width/2;
+      player.y = box2.y - player.height - 1;
+      if ( box1.dir === 'r'
+            && player.velY > 0) {
+            player.velY = -player.velY - player.velX;
+      }
+      if ( box1.dir === 'l'
+            && player.velY > 0) {
+            player.velY = -player.velY + player.velX;
+      }
+      if (box1.dir === 'b') {
+        player.velY = -player.velY;
+      }
+      break;
 
-#### Day 1
-- [x] Reorganize file structure, and put elements like the player, canvas, and key mapping into different classes.
-- [x] Implement mouse controls for the user to shoot blue and orange portals.
-- [x] Implement collision detection between portals and walls, and portals and players
-- [x] Teleport player between portals.
-
-#### Day 2
-- [x] Implement new type of block that you can shoot through but can't pass though.
-- [x] Design custom bitmap editor to make level design simpler.
-- [x] Import sprites for player and walls.
-- [x] Add additional levels.
-
-#### Day 3
-- [x] Continue to add additional levels.
-- [x] Add keyboard/mouse controls to the side.
-
-#### Day 4
-- [x] Add last level (super difficult)
-- [x] Add button to show description of the game.
+      ...
+  }
+}
+```
 
 ### Development Build Steps:
 1. `npm install`
 2. For making changes to scss: `sass --watch scss:css`
+
+##### Hint for levels 10-11
+* 10 - You can still shoot portals when the game is paused.
+* 11 - The reset button preserves your velocity. :)

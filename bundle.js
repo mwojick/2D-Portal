@@ -96,7 +96,7 @@
 "use strict";
 
 
-var _test = __webpack_require__(/*! ./lib/test */ "./lib/test.js");
+var _util = __webpack_require__(/*! ./lib/util */ "./lib/util.js");
 
 var _collision = __webpack_require__(/*! ./lib/collision */ "./lib/collision.js");
 
@@ -113,6 +113,8 @@ var _map_levels = __webpack_require__(/*! ./lib/maps/map_levels */ "./lib/maps/m
 var _sprites = __webpack_require__(/*! ./lib/sprites */ "./lib/sprites.js");
 
 document.addEventListener('DOMContentLoaded', function () {
+
+  // disableScrollBars();
 
   var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
@@ -428,7 +430,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // first update call
   update();
 });
-// import { boxFunc } from './lib/boxes';
 
 /***/ }),
 
@@ -907,9 +908,9 @@ var teleport = exports.teleport = function teleport(player, box1, box2) {
 
 /***/ }),
 
-/***/ "./lib/test.js":
+/***/ "./lib/util.js":
 /*!*********************!*\
-  !*** ./lib/test.js ***!
+  !*** ./lib/util.js ***!
   \*********************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -918,10 +919,11 @@ var teleport = exports.teleport = function teleport(player, box1, box2) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-var Test = exports.Test = function Test() {
-  console.log("test");
+var disableScrollBars = exports.disableScrollBars = function disableScrollBars() {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.scroll = "no";
 };
 
 /***/ })

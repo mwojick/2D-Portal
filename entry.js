@@ -1,5 +1,5 @@
 
-import { Test } from './lib/test';
+import { disableScrollBars } from './lib/util';
 
 import { colCheck, changeBoxDir,
   objectPlayerCol, objectPortalCol,
@@ -7,7 +7,7 @@ import { colCheck, changeBoxDir,
 } from './lib/collision';
 
 import { player, playerPos } from './lib/player';
-// import { boxFunc } from './lib/boxes';
+
 import { teleport } from './lib/teleport';
 import { Canvas } from './lib/canvas';
 import { Map, BLOCK_W, BLOCK_H } from './lib/maps/map';
@@ -21,6 +21,8 @@ import { Sprites } from './lib/sprites';
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  // disableScrollBars();
 
   let requestAnimationFrame =
   window.requestAnimationFrame ||
