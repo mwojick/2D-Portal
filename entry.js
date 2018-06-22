@@ -159,9 +159,39 @@ function update(){
     let sprite = sprites.boxSpriteP;
 
     if (mainBox === map.boxesP[i]) {
-      sprite = sprites.boxSpriteBlue;
+      switch (mainBox.dir) {
+        case "b":
+          sprite = sprites.boxSpriteBlueT;
+          break;
+        case "t":
+          sprite = sprites.boxSpriteBlueB;
+          break;
+        case "r":
+          sprite = sprites.boxSpriteBlueL;
+          break;
+        case "l":
+          sprite = sprites.boxSpriteBlueR;
+          break;
+        default:
+          sprite = sprites.boxSpriteBlue;
+      }
     } else if (altBox === map.boxesP[i]) {
-      sprite = sprites.boxSpriteOrange;
+      switch (altBox.dir) {
+        case "b":
+          sprite = sprites.boxSpriteOrangeT;
+          break;
+        case "t":
+          sprite = sprites.boxSpriteOrangeB;
+          break;
+        case "r":
+          sprite = sprites.boxSpriteOrangeL;
+          break;
+        case "l":
+          sprite = sprites.boxSpriteOrangeR;
+          break;
+        default:
+          sprite = sprites.boxSpriteOrange;
+      }
     }
 
     canvas.ctx.drawImage(sprite, map.boxesP[i].x, map.boxesP[i].y, map.boxesP[i].width, map.boxesP[i].height);

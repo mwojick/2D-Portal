@@ -240,9 +240,39 @@ document.addEventListener('DOMContentLoaded', function () {
       var sprite = sprites.boxSpriteP;
 
       if (mainBox === map.boxesP[_i]) {
-        sprite = sprites.boxSpriteBlue;
+        switch (mainBox.dir) {
+          case "b":
+            sprite = sprites.boxSpriteBlueT;
+            break;
+          case "t":
+            sprite = sprites.boxSpriteBlueB;
+            break;
+          case "r":
+            sprite = sprites.boxSpriteBlueL;
+            break;
+          case "l":
+            sprite = sprites.boxSpriteBlueR;
+            break;
+          default:
+            sprite = sprites.boxSpriteBlue;
+        }
       } else if (altBox === map.boxesP[_i]) {
-        sprite = sprites.boxSpriteOrange;
+        switch (altBox.dir) {
+          case "b":
+            sprite = sprites.boxSpriteOrangeT;
+            break;
+          case "t":
+            sprite = sprites.boxSpriteOrangeB;
+            break;
+          case "r":
+            sprite = sprites.boxSpriteOrangeL;
+            break;
+          case "l":
+            sprite = sprites.boxSpriteOrangeR;
+            break;
+          default:
+            sprite = sprites.boxSpriteOrange;
+        }
       }
 
       canvas.ctx.drawImage(sprite, map.boxesP[_i].x, map.boxesP[_i].y, map.boxesP[_i].width, map.boxesP[_i].height);
@@ -774,8 +804,32 @@ var Sprites = exports.Sprites = function Sprites() {
   this.boxSpriteBlue = new Image();
   this.boxSpriteBlue.src = "./sprites/wall_blue.png";
 
+  this.boxSpriteBlueT = new Image();
+  this.boxSpriteBlueT.src = "./sprites/wall_blue/wall_blue_t.png";
+
+  this.boxSpriteBlueB = new Image();
+  this.boxSpriteBlueB.src = "./sprites/wall_blue/wall_blue_b.png";
+
+  this.boxSpriteBlueL = new Image();
+  this.boxSpriteBlueL.src = "./sprites/wall_blue/wall_blue_l.png";
+
+  this.boxSpriteBlueR = new Image();
+  this.boxSpriteBlueR.src = "./sprites/wall_blue/wall_blue_r.png";
+
   this.boxSpriteOrange = new Image();
   this.boxSpriteOrange.src = "./sprites/wall_orange.png";
+
+  this.boxSpriteOrangeT = new Image();
+  this.boxSpriteOrangeT.src = "./sprites/wall_orange/wall_orange_t.png";
+
+  this.boxSpriteOrangeB = new Image();
+  this.boxSpriteOrangeB.src = "./sprites/wall_orange/wall_orange_b.png";
+
+  this.boxSpriteOrangeL = new Image();
+  this.boxSpriteOrangeL.src = "./sprites/wall_orange/wall_orange_l.png";
+
+  this.boxSpriteOrangeR = new Image();
+  this.boxSpriteOrangeR.src = "./sprites/wall_orange/wall_orange_r.png";
 
   this.exitSprite = new Image();
   this.exitSprite.src = "./sprites/door.png";
