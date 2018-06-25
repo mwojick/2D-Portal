@@ -41,7 +41,7 @@ This project was built using the following technologies:
 
 ### Technical Challenge
 
-The most difficult technical challenge for this project was translating the users coordinates and velocities when they go through portals. The collision detection algorithm used for this project returns a letter based on the side that the box was hit on. Using this information, I take the side that the exit portal was shot on and use that to determine how to teleport the player. For instance, one of the cases in the switch statement for my teleport function is as follows:
+The most difficult technical challenge for this project was translating the users coordinates and velocities when they go through portals. The collision detection algorithm used for this project returns a letter based on the side that the first box was hit on (b, t, r, l for bottom, top, right, and left, respectively). Using this information, I take the side that the exit portal was shot on and use that to determine how to teleport the player. For instance, one of the cases in the switch statement for my teleport function is as follows:
 
 ```JavaScript
 export const teleport = (player, box1, box2) => {
@@ -66,6 +66,8 @@ export const teleport = (player, box1, box2) => {
   }
 }
 ```
+
+box1 represents the portal that the player collided with, and box2 is the portal that the player will teleport to. box1 and box2 both have a direction (dir) attribute that corresponds to how the portal was formed when the player originally shot the portal (i.e. the direction the portal was shot from). The player's x and y coordinates are set based on the location of the second portal (box2), and the player's velocity is based on the dirs of both portals to create a natural feeling of velocity transfer. for instance, if both portals are on the ground (both have dir === 'b'), jumping down portal1 should invert their vertical velocity when exiting from portal2.
 
 ### Build Process:
 1. `npm install`
