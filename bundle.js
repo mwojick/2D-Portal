@@ -283,10 +283,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // teleport player
       if (dir === "l" || dir === "r" || dir === "b" || dir === "t") {
-        if (mainBox === map.boxesP[_i] && Object.keys(altBox).length !== 0) {
+        if (mainBox === map.boxesP[_i] && Object.keys(altBox).length !== 0 && mainBox.dir === dir) {
           (0, _teleport.teleport)(_player.player, mainBox, altBox);
           continue;
-        } else if (altBox === map.boxesP[_i] && Object.keys(mainBox).length !== 0) {
+        } else if (altBox === map.boxesP[_i] && Object.keys(mainBox).length !== 0 && altBox.dir === dir) {
           (0, _teleport.teleport)(_player.player, altBox, mainBox);
           continue;
         }
