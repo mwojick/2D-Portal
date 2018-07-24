@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let canvas = new Canvas("canvas"),
     keys = [],
     friction = 0.8,
+    airRes = 0.83,
     gravity = 0.8,
     maxGrav = 38,
     portalSpeed = 15;
@@ -129,7 +130,12 @@ function update(){
       }
   }
 
-  player.velX *= friction;
+  if (player.grounded) {
+    player.velX *= friction;
+  } else {
+    player.velX *= airRes;
+  }
+
   if (player.velY < maxGrav) {
     player.velY += gravity;
   }

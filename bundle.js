@@ -126,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var canvas = new _canvas.Canvas("canvas"),
       keys = [],
       friction = 0.8,
+      airRes = 0.83,
       gravity = 0.8,
       maxGrav = 38,
       portalSpeed = 15;
@@ -212,7 +213,12 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    _player.player.velX *= friction;
+    if (_player.player.grounded) {
+      _player.player.velX *= friction;
+    } else {
+      _player.player.velX *= airRes;
+    }
+
     if (_player.player.velY < maxGrav) {
       _player.player.velY += gravity;
     }
