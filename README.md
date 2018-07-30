@@ -13,6 +13,14 @@
 
 2D Portal is a puzzle-platformer game inspired by the Portal series of games. The player navigates through a series of levels by strategically placing portals in two different places and moving between them.
 
+### Technologies Used
+
+- HTML/CSS/SCSS
+- JavaScript for game physics and logic.
+- HTML5 Canvas for DOM manipulation and rendering.
+- Webpack to bundle up the JS files.
+- Font Awesome for icons.
+
 ### Features
 
 In 2D Portal, users can:
@@ -27,17 +35,6 @@ In 2D Portal, users can:
 The app consists of a main canvas element with gameplay elements inside, with a description of the game in modal form (by clicking on the description button):
 
 ![alt text](./img/2d-portal-screenshot.png "2D Portal Game")
-
-
-### Technologies Used
-
-This project was built using the following technologies:
-
-* HTML/CSS/SCSS
-* JavaScript for game physics and logic.
-* HTML5 Canvas for DOM manipulation and rendering.
-* Webpack to bundle up the JS files.
-* Font Awesome for icons.
 
 ### Technical Challenge
 
@@ -70,9 +67,11 @@ export const teleport = (player, box1, box2) => {
 box1 represents the portal that the player collided with, and box2 is the portal that the player will teleport to. box1 and box2 both have a direction (dir) attribute that corresponds to how the portal was formed when the player originally shot the portal (i.e. the direction the portal was shot from). The player's x and y coordinates are set based on the location of the second portal (box2), and the player's velocity is based on the dirs of both portals to create a natural feeling of velocity transfer. for instance, if both portals are on the ground (both have dir === 'b'), jumping down portal1 should invert their vertical velocity when exiting from portal2.
 
 ### Build Process:
+
 1. `npm install`
 2. For making changes to scss: `sass --watch scss:css`
 
 #### Hint for levels 10-11
-* 10 - You can still shoot portals when the game is paused.
-* 11 - The reset button preserves your velocity. :)
+
+- 10 - You can still shoot portals when the game is paused.
+- 11 - The reset button preserves your velocity. :)
