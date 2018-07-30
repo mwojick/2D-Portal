@@ -30,8 +30,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "concurrently": "^3.6.1",
-    "css-loader": "^1.0.0",
-    "style-loader": "^0.21.0"
+    "concurrently": "^3.6.1"
   }
 }
