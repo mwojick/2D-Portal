@@ -81,7 +81,7 @@ body {
   .top :first-child {
     margin-left: 50px; }
   .top :last-child {
-    margin-right: 30px;
+    margin-right: 20px;
     margin-left: 10px; }
 
 .title {
@@ -198,10 +198,10 @@ a {
   a i {
     align-self: center; }
 
-a:hover i {
-  border-radius: 4px;
-  color: white;
-  background: black; }
+a:hover .fa-github-square {
+  color: #ff8022; }
+a:hover .fa-linkedin {
+  color: #2596ff; }
 
 .mouse-control {
   display: flex;

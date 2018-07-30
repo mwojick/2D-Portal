@@ -104,7 +104,7 @@ body {
     margin-left: 50px;
   }
   :last-child {
-    margin-right: 30px;
+    margin-right: 20px;
     margin-left: 10px;
   }
 }
@@ -240,10 +240,11 @@ a {
   }
 }
 a:hover {
-  i {
-    border-radius: 4px;
-    color: white;
-    background: black;
+  .fa-github-square {
+    color: $orange;
+  }
+  .fa-linkedin {
+    color: $blue;
   }
 }
 
