@@ -433,6 +433,30 @@ document.addEventListener('DOMContentLoaded', function () {
     _player.player.levelCount = e.currentTarget.value - 1;
   });
 
+  // handle click on collapsible button
+  var coll = document.getElementsByClassName("collapsible")[0];
+  var arrowR = document.getElementsByClassName("arrow-right")[0];
+  var arrowL = document.getElementsByClassName("arrow-left")[0];
+
+  coll.addEventListener("click", function () {
+    var content = this.nextElementSibling;
+    if (content.style.maxWidth !== "0px") {
+      content.style.maxWidth = "0px";
+      arrowL.style.display = "block";
+      arrowR.style.display = "none";
+      setTimeout(function () {
+        coll.style.borderTopLeftRadius = "10px";
+        coll.style.borderBottomLeftRadius = "10px";
+      }, 300);
+    } else {
+      coll.style.borderBottomLeftRadius = "0px";
+      coll.style.borderTopLeftRadius = "0px";
+      content.style.maxWidth = "440" + "px";
+      arrowL.style.display = "none";
+      arrowR.style.display = "block";
+    }
+  });
+
   // first update call
   update();
 });
