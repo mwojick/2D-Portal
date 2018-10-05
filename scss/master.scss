@@ -1,11 +1,9 @@
 //sass --watch scss:css
-
-$grey: #BCBCBC;
+$grey: #bcbcbc;
 $blue: #2596ff;
 $orange: #ff8022;
-
 html {
-  background-image: url('../img/background3.jpg');
+  background-image: url("../img/background3.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -21,7 +19,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .controls {
@@ -43,30 +41,29 @@ body {
 }
 
 .arrow {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
 
-.arrow-right { 
+.arrow-right {
   border-left: 20px solid rgb(88, 88, 88);
 }
 
 .arrow-left {
   display: none;
-  border-right:20px solid rgb(88, 88, 88);
+  border-right: 20px solid rgb(88, 88, 88);
 }
 
 .collapsible:hover {
   background: rgb(148, 148, 148);
   cursor: pointer;
-
   .arrow-right {
     border-left: 20px solid rgb(0, 0, 0);
   }
   .arrow-left {
-    border-right:20px solid rgb(0, 0, 0);
+    border-right: 20px solid rgb(0, 0, 0);
   }
 }
 
@@ -79,16 +76,13 @@ body {
   width: 440px;
   height: 100%;
   background: $grey;
-  
   padding: 0px 0px 0px 0px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-
   max-width: 440px;
   overflow: hidden;
   transition: max-width 0.3s ease-out;
 }
-
 
 .top {
   display: flex;
@@ -108,23 +102,28 @@ body {
     margin-left: 10px;
   }
 }
+
 .title {
   font-size: 50px;
   flex-grow: 3;
   letter-spacing: 1px;
 }
+
 .two {
   color: $blue;
 }
+
 .dee {
   color: $orange;
 }
+
 .level-info {
   font-size: 40px;
   flex-grow: 3;
   display: flex;
   flex-direction: row;
 }
+
 .description-button {
   flex-grow: 2;
   font-size: 26px;
@@ -133,18 +132,15 @@ body {
   text-align: center;
   margin-right: 10px;
 }
+
 .description-button:hover {
   cursor: pointer;
 }
 
-
-
 .controls-title {
   margin-bottom: 40px;
   font-size: 40px;
-
 }
-
 
 .AWD {
   width: 100%;
@@ -162,6 +158,7 @@ body {
     background: white;
   }
 }
+
 .arrow-keys {
   width: 100%;
   display: flex;
@@ -174,6 +171,7 @@ body {
     text-align: center;
   }
 }
+
 .move-funcs {
   width: 100%;
   display: flex;
@@ -208,8 +206,6 @@ body {
   text-align: center;
 }
 
-
-
 .select {
   margin-top: 10px;
   display: flex;
@@ -217,17 +213,19 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .select-level-text {
   margin-right: 15px;
   font-size: 24px;
 }
+
 .select-level {
   border-radius: 10px;
   font-size: 20px;
   background: white;
   border: 1px solid black;
   padding: 12px 15px;
-  text-align-last:center;
+  text-align-last: center;
 }
 
 a {
@@ -239,6 +237,7 @@ a {
     align-self: center;
   }
 }
+
 a:hover {
   .fa-github-square {
     color: $orange;
@@ -247,7 +246,6 @@ a:hover {
     color: $blue;
   }
 }
-
 
 .mouse-control {
   display: flex;
@@ -266,53 +264,62 @@ a:hover {
 
 // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
 /* The Modal (background) */
-.modal {
-    letter-spacing: 0.5px;
-    display: none; /* block by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-    font-size: 24px;
-    img {
-      display: inline-block;
-      width: 50px;
-    }
+.modal {
+  letter-spacing: 0.5px;
+  display: none;
+  /* block by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  font-size: 24px;
+  img {
+    display: inline-block;
+    width: 50px;
+  }
 }
 
 /* Modal Content */
+
 .modal-content {
-    background-color: #dbdbdb;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 40%;
-    border-radius: 10px;
+  background-color: #dbdbdb;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  border-radius: 10px;
 }
 
 /* The Close Button */
+
 .close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
-
-
 
 .modal-text {
   display: flex;
@@ -326,12 +333,10 @@ a:hover {
 }
 
 .modal-start {
-
 }
 
 .modal-descr {
   margin: 30px 75px;
-
 }
 
 .modal-items {
@@ -357,6 +362,5 @@ a:hover {
 .orange {
   color: $orange;
 }
-
 
 //

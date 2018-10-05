@@ -5,7 +5,7 @@ html {
 
 canvas {
   background-image: url("../img/wall_texture_s.png");
-  border: 1px solid #BCBCBC;
+  border: 1px solid #bcbcbc;
   /* border: 1px solid #000; */ }
 
 body {
@@ -13,7 +13,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  font-family: 'Roboto', sans-serif; }
+  font-family: "Roboto", sans-serif; }
 
 .controls {
   display: flex;
@@ -23,7 +23,7 @@ body {
   height: 740px; }
 
 .collapsible {
-  background: #BCBCBC;
+  background: #bcbcbc;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,7 +60,7 @@ body {
   align-items: center;
   width: 440px;
   height: 100%;
-  background: #BCBCBC;
+  background: #bcbcbc;
   padding: 0px 0px 0px 0px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -76,7 +76,7 @@ body {
   padding: 5px 0px;
   border-radius: 10px;
   align-items: center;
-  background: #BCBCBC;
+  background: #bcbcbc;
   width: 100%; }
   .top :first-child {
     margin-left: 50px; }
